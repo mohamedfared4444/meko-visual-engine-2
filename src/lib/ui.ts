@@ -8,7 +8,7 @@ import {PAL} from './palette';
  * fonts so rendering is identical on every machine.
  */
 
-export const FONT_DISPLAY = 'Baloo 2';
+export const FONT_DISPLAY = 'Baloo2';
 export const FONT_BODY = 'Nunito';
 
 export function makeTitleCard(): Node {

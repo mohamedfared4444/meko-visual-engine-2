@@ -99,8 +99,8 @@ async function run(): Promise<void> {
   const state = window.__MC_RENDER_STATE;
   try {
     // Deterministic typography: wait until every @font-face is loaded.
-    await document.fonts.load('800 60px "Baloo 2"');
-    await document.fonts.load('600 40px "Baloo 2"');
+    await document.fonts.load('800 60px Baloo2');
+    await document.fonts.load('600 40px Baloo2');
     await document.fonts.load('900 40px "Nunito"');
     await document.fonts.load('700 40px "Nunito"');
     await document.fonts.ready;

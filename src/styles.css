@@ -1,14 +1,14 @@
 /* Bundled OFL fonts - identical typography on every machine. */
 
 @font-face {
-  font-family: 'Baloo 2';
+  font-family: 'Baloo2';
   src: url('./fonts/Baloo2-600.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Baloo 2';
+  font-family: 'Baloo2';
   src: url('./fonts/Baloo2-800.ttf') format('truetype');
   font-weight: 800;
   font-style: normal;
