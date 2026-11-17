@@ -1,0 +1,22 @@
+{
+  "name": "meko-visual-engine-2",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Meko Visual Engine 2.0 - isolated prototype of a stylized 2.5D educational manufacturing animation engine (Motion Canvas + TypeScript). Lives on branch visual-engine-2-prototype; never merged to Meko production.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "render": "motion-canvas render src/project.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@motion-canvas/2d": "3.17.2",
+    "@motion-canvas/core": "3.17.2",
+    "@motion-canvas/vite-plugin": "3.17.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vite": "^5.4.20"
+  }
+}
