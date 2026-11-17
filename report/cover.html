@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --c-bg: #f4f5f5;
+    --c-accent: #1f6c92;
+    --c-text: #131515;
+    --c-muted: #747b7e;
+    --c-mid: #32454e;
+    --c-surface: #e8eaeb;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--c-bg);
+  }
+  .cover {
+    position: relative;
+    width: 794px;
+    height: 1123px;
+    background: var(--c-bg);
+    font-family: 'Inter', sans-serif;
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+  /* Layer 1 - background grid (clipped) */
+  .layer1 {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+    background-image:
+      linear-gradient(to right, rgba(50, 69, 78, 0.05) 0.5px, transparent 0.5px),
+      linear-gradient(to bottom, rgba(50, 69, 78, 0.05) 0.5px, transparent 0.5px);
+    background-size: 66px 66px;
+  }
+  /* Layer 2 - structural anchor line */
+  .layer2 { position: absolute; inset: 0; z-index: 2; }
+  .anchor-line {
+    position: absolute;
+    left: 95px;
+    top: 112px;
+    width: 8px;
+    height: 899px;
+    background: var(--c-mid);
+  }
+  /* Layer 3 - content */
+  .layer3 { position: absolute; inset: 0; z-index: 3; }
+  .kicker {
+    position: absolute;
+    left: 150px;
+    top: 168px;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: var(--c-text);
+    opacity: 0.6;
+    text-transform: uppercase;
+    max-width: 560px;
+  }
+  .hero {
+    position: absolute;
+    left: 150px;
+    top: 300px;
+    font-size: 69px;
+    line-height: 1.15;
+    font-weight: 900;
+    color: var(--c-text);
+    max-width: 600px;
+  }
+  .hero .accent-word { color: var(--c-accent); }
+  .summary {
+    position: absolute;
+    left: 150px;
+    top: 562px;
+    font-size: 17px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: var(--c-text);
+    opacity: 0.85;
+    max-width: 470px;
+  }
+  .meta {
+    position: absolute;
+    left: 150px;
+    top: 842px;
+    font-size: 16px;
+    line-height: 1.7;
+    font-weight: 400;
+    color: var(--c-text);
+  }
+  .meta .label { color: var(--c-muted); }
+  .footer {
+    position: absolute;
+    left: 150px;
+    top: 1040px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: var(--c-text);
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <div class="cover">
+    <div class="layer1"></div>
+    <div class="layer2">
+      <div class="anchor-line"></div>
+    </div>
+    <div class="layer3">
+      <div class="kicker">Isolated Prototype &middot; Technical Evaluation &amp; Test Report</div>
+      <div class="hero">MEKO<br />VISUAL ENGINE 2.0</div>
+      <div class="summary">
+        A proof of concept for a premium stylized 2.5D educational manufacturing
+        animation engine, built with Motion Canvas and TypeScript. Verified end to
+        end: scene code renders deterministically to a 1080&times;1920 MP4 on a
+        GitHub-hosted runner at zero cost, with the production Meko system untouched.
+      </div>
+      <div class="meta">
+        <div><span class="label">Repository&nbsp;&nbsp;</span>mohamedfared4444/meko-visual-engine-2</div>
+        <div><span class="label">Branch&nbsp;&nbsp;</span>visual-engine-2-prototype</div>
+        <div><span class="label">Date&nbsp;&nbsp;</span>November 2026 &middot; Status: awaiting human approval</div>
+      </div>
+      <div class="footer">Meko Visual Engine 2 &middot; Test Report &middot; Not merged to production</div>
+    </div>
+  </div>
+</body>
+</html>
