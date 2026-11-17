@@ -1,0 +1,86 @@
+name: Visual Engine 2 - Prototype Render (manual, isolated)
+
+# Isolated manual test workflow for the Meko Visual Engine 2.0 prototype.
+# It runs ONLY on manual dispatch in THIS repository. It never touches the
+# production Meko app, the production renderer workflow (meko-renderer),
+# Vercel deployments, or any production data.
+
+on:
+  workflow_dispatch:
+    inputs:
+      crf:
+        description: "x264 CRF quality (18 = high, 23 = smaller file)"
+        required: false
+        default: "18"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    name: Render chocolate prototype on GitHub-hosted runner
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out the isolated prototype
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Check FFmpeg availability
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            echo "ffmpeg missing - installing via apt"
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          ffmpeg -version | head -1
+          google-chrome --version || chrome --version || true
+
+      # The Motion Canvas Renderer needs Chrome; ubuntu-latest runners ship
+      # Google Chrome stable. Point the driver at it.
+      - name: Render prototype (headless Chrome + FFmpeg)
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+          FPS: "30"
+        run: |
+          set -o pipefail
+          /usr/bin/time -v node scripts/render.mjs output/meko-visual-engine-2-preview.mp4 2> >(tee render-time.log >&2)
+
+      - name: Print resource usage summary
+        if: always()
+        run: |
+          echo "## Render statistics" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f output/render-stats.json ]; then
+            cat output/render-stats.json >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f render-time.log ]; then
+            grep -E "Maximum resident|Elapsed|Percent of CPU|User time|System time" render-time.log >> "$GITHUB_STEP_SUMMARY" || true
+          fi
+
+      - name: Upload MP4 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: meko-visual-engine-2-preview
+          path: output/meko-visual-engine-2-preview.mp4
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload render statistics artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: render-stats
+          path: |
+            output/render-stats.json
+            render-time.log
+          if-no-files-found: ignore
+          retention-days: 7
